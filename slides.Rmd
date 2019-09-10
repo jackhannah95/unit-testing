@@ -1,10 +1,11 @@
 ---
-title: "Presentation title"
-subtitle: "Presentation subtitle"
-author: 'Name <br> Organisation <br>'
-date: "Date <br><br> Slides: url to slides"
+title: "Unit testing in R using <br> the testthat package"
+subtitle: "Scottish Government R user day"
+author: 'Jack Hannah <br> NHS National Services Scotland <br>'
+date: "1 October 2019 <br><br> Slides: https://github.com/jackhannah95/unit-testing"
 output:
   ioslides_presentation:
+    widescreen: true
     css: my-theme.css
 ---
 
