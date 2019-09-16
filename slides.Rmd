@@ -37,3 +37,24 @@ include_graphics(here::here("images", "pill-test.jpg"))
 
 
 ## Why do unit testing?
+
+- Provides evidence that your code works as intended - useful for anyone else who uses it, or yourself in future
+
+- If you find a bug in the code, unit tests are a way of checking that it has been resolved
+
+- If you make amendments to the code in future, re-running existing unit tests is a way of checking you haven't inadvertently broken anything that used to work
+
+- Forces you to break large, unwieldy sections of code up into smaller, more manageable functions
+
+
+## The testthat package
+
+- "_Testing should be something that you do all the time, but it’s normally painful and boring_" - [Hadley Wickham](https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf)
+
+- The testthat package provides functions to automate unit testing
+
+- It's designed with package development in mind, but there's no reason it can't be used to test functions in standalone scripts
+
+```{r out.width = "25%", fig.align = 'center'}
+include_graphics(here::here("images", "testthat_logo.png"))
+```
