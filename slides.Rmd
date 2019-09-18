@@ -12,10 +12,18 @@ output:
 ```{r setup, include = FALSE}
 # Load packages required
 library(knitr)
-library(magrittr)
-library(testthat)
 
 knitr::opts_chunk$set(echo = TRUE)
+
+error_hook <- knitr::knit_hooks$get("error")
+knitr::knit_hooks$set(error = function(x, options) {
+  if (!is.null(n <- options$linewidth)) {
+    x = knitr:::split_lines(x)
+    if (any(nchar(x) > n)) x = strwrap(x, width = n)
+    x = paste(x, collapse = '\n')
+  }
+  error_hook(x, options)
+})
 ```
 
 
@@ -65,7 +73,9 @@ include_graphics(here::here("images", "testthat_logo.png"))
 
 The most prominent functions in testthat are the `expect_` functions:
 
-```{r}
+```{r, message = FALSE}
+library(testthat)
+
 expect_equal(2 + 3, 5)
 expect_error(sum(1, "two"))
 ```
@@ -123,4 +133,41 @@ n_day(dmy(01012018), dmy(31012018), 2)
 
 # Number of Thursdays in 2020
 n_day(dmy(01012020), dmy(31122020), 4)
+```
+
+
+## A practical example
+
+You might do some informal checks that the function works as expected:
+
+```{r, error = TRUE, linewidth = 90}
+# Check that n_day errors if not supplied with a valid n
+n_day(dmy(01012020), dmy(31122020), 7)
+
+# Check that n_day produces at least 52 instances of every day in 2020
+unlist(purrr::map(0:6, ~ n_day(dmy(01012020), dmy(31122020), .x)))
+```
+
+
+## A practical example
+
+But writing formal, automated tests is better:
+
+```{r}
+test_that("Errors if supplied with input of incorrect class", {
+  expect_error(n_day(dmy(01012020), dmy(31122020), 7))
+})
+
+test_that("Produces at least 52 instances of every day in 2020", {
+  instances <- unlist(purrr::map(0:6, ~ n_day(dmy(01012020), dmy(31122020),.x)))
+  
+  expect_true(all(instances >= 52))
+})
+```
+
+
+## A practical example
+
+```{r}
+test_file(here::here("code", "03_test-n_day.R"))
 ```

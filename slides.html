@@ -3157,7 +3157,9 @@ slide:not(.current) .plotly.html-widget{
 
 <p>The most prominent functions in testthat are the <code>expect_</code> functions:</p>
 
-<pre class = 'prettyprint lang-r'>expect_equal(2 + 3, 5)
+<pre class = 'prettyprint lang-r'>library(testthat)
+
+expect_equal(2 + 3, 5)
 expect_error(sum(1, &quot;two&quot;))</pre>
 
 <p>If these tests are run individually and pass, they return no output. They return an error message if they fail:</p>
@@ -3212,7 +3214,57 @@ n_day(dmy(01012018), dmy(31012018), 2)</pre>
 <pre class = 'prettyprint lang-r'># Number of Thursdays in 2020
 n_day(dmy(01012020), dmy(31122020), 4)</pre>
 
-<pre >## [1] 53</pre></article></slide>
+<pre >## [1] 53</pre>
+
+</article></slide><slide class=""><hgroup><h2>A practical example</h2></hgroup><article  id="a-practical-example-3">
+
+<p>You might do some informal checks that the function works as expected:</p>
+
+<pre class = 'prettyprint lang-r'># Check that n_day errors if not supplied with a valid n
+n_day(dmy(01012020), dmy(31122020), 7)</pre>
+
+<pre >## Error in n_day(dmy(1012020), dmy(31122020), 7): The day of the week must be a number
+between 0 and 6</pre>
+
+<pre class = 'prettyprint lang-r'># Check that n_day produces at least 52 instances of every day in 2020
+unlist(purrr::map(0:6, ~ n_day(dmy(01012020), dmy(31122020), .x)))</pre>
+
+<pre >## [1] 52 52 52 53 53 52 52</pre>
+
+</article></slide><slide class=""><hgroup><h2>A practical example</h2></hgroup><article  id="a-practical-example-4">
+
+<p>But writing formal, automated tests is better:</p>
+
+<pre class = 'prettyprint lang-r'>test_that(&quot;Errors if supplied with input of incorrect class&quot;, {
+  expect_error(n_day(dmy(01012020), dmy(31122020), 7))
+})
+
+test_that(&quot;Produces at least 52 instances of every day in 2020&quot;, {
+  instances &lt;- unlist(purrr::map(0:6, ~ n_day(dmy(01012020), dmy(31122020),.x)))
+  
+  expect_true(all(instances &gt;= 52))
+})</pre>
+
+</article></slide><slide class=""><hgroup><h2>A practical example</h2></hgroup><article  id="a-practical-example-5">
+
+<pre class = 'prettyprint lang-r'>test_file(here::here(&quot;code&quot;, &quot;03_test-n_day.R&quot;))</pre>
+
+<pre >## v | OK F W S | Context
+## 
+- |  1       | 0
+\ |  2       | 0
+| |  3       | 0
+/ |  4       | 0
+- |  5       | 0
+\ |  6       | 0
+| |  7       | 0
+## == Results =================================================================
+## Duration: 0.2 s
+## 
+## OK:       7
+## Failed:   0
+## Warnings: 0
+## Skipped:  0</pre></article></slide>
 
 
   <slide class="backdrop"></slide>
