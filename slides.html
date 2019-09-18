@@ -3155,9 +3155,7 @@ slide:not(.current) .plotly.html-widget{
 
 </article></slide><slide class=""><hgroup><h2>The testthat package</h2></hgroup><article  id="the-testthat-package-1">
 
-<ul>
-<li>The most prominent functions in testthat are the <code>expect_</code> functions:</li>
-</ul>
+<p>The most prominent functions in testthat are the <code>expect_</code> functions:</p>
 
 <pre class = 'prettyprint lang-r'>expect_equal(2 + 3, 5)
 expect_error(sum(1, &quot;two&quot;))</pre>
@@ -3166,7 +3164,55 @@ expect_error(sum(1, &quot;two&quot;))</pre>
 
 <pre class = 'prettyprint lang-r'>expect_lt(3, 2)</pre>
 
-<pre >## Error: 3 is not strictly less than 2. Difference: 1</pre></article></slide>
+<pre >## Error: 3 is not strictly less than 2. Difference: 1</pre>
+
+</article></slide><slide class=""><hgroup><h2>A practical example</h2></hgroup><article  id="a-practical-example">
+
+<p>Imagine you want to calculate the number of instances of a particular day in a set time period (motivation: the HSMR publication goes out on the third last Tuesday of the month, every three months). You could do it &lsquo;manually&rsquo; every time:</p>
+
+<pre class = 'prettyprint lang-r'>library(lubridate)
+
+# Number of Tuesdays in January 2018
+sum(format(seq(dmy(01012018), dmy(31012018), by = &quot;day&quot;), &quot;%w&quot;) == 2)</pre>
+
+<pre >## [1] 5</pre>
+
+<pre class = 'prettyprint lang-r'># Number of Thursdays in 2020
+sum(format(seq(dmy(01012020), dmy(31122020), by = &quot;day&quot;), &quot;%w&quot;) == 4)</pre>
+
+<pre >## [1] 53</pre>
+
+</article></slide><slide class=""><hgroup><h2>A practical example</h2></hgroup><article  id="a-practical-example-1">
+
+<p>If you have to do this lots of times, for different time periods, it’s easier, safer and all-round better to write a function:</p>
+
+<pre class = 'prettyprint lang-r'>n_day &lt;- function(start, end, n) {
+  
+  if (any(class(c(start, end)) != &quot;Date&quot;)) {
+    stop(&quot;The start and end dates must be in date format&quot;)
+  }
+  
+  # Note that Sunday is considered to be day 0; not day 7
+  if (!n %in% 0:6) {
+    stop(&quot;The day of the week must be a number between 0 and 6&quot;)
+  }
+  
+  sum(format(seq(start, end, by = &quot;day&quot;), &quot;%w&quot;) == n)
+}</pre>
+
+</article></slide><slide class=""><hgroup><h2>A practical example</h2></hgroup><article  id="a-practical-example-2">
+
+<p>You can then call that function:</p>
+
+<pre class = 'prettyprint lang-r'># Number of Tuesdays in January 2018
+n_day(dmy(01012018), dmy(31012018), 2)</pre>
+
+<pre >## [1] 5</pre>
+
+<pre class = 'prettyprint lang-r'># Number of Thursdays in 2020
+n_day(dmy(01012020), dmy(31122020), 4)</pre>
+
+<pre >## [1] 53</pre></article></slide>
 
 
   <slide class="backdrop"></slide>
