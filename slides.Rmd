@@ -1,7 +1,7 @@
 ---
 title: "Unit testing in R using <br> the testthat package"
 subtitle: "Scottish Government R user day"
-author: 'Jack Hannah <br> NHS National Services Scotland <br>'
+author: 'Jack Hannah <br> Information Services Division <br>'
 date: "1 October 2019 <br><br> Slides: https://github.com/jackhannah95/unit-testing"
 output:
   ioslides_presentation:
@@ -13,8 +13,9 @@ output:
 # Load packages required
 library(knitr)
 library(magrittr)
+library(testthat)
 
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
@@ -31,7 +32,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Why do unit testing?
 
-```{r out.width = "85%", fig.align = 'center'}
+```{r echo = FALSE, out.width = "85%", fig.align = 'center'}
 include_graphics(here::here("images", "pill-test.jpg"))
 ```
 
@@ -55,6 +56,22 @@ include_graphics(here::here("images", "pill-test.jpg"))
 
 - It's designed with package development in mind, but there's no reason it can't be used to test functions in standalone scripts
 
-```{r out.width = "25%", fig.align = 'center'}
+```{r echo = FALSE, out.width = "25%", fig.align = 'center'}
 include_graphics(here::here("images", "testthat_logo.png"))
+```
+
+
+## The testthat package
+
+- The most prominent functions in testthat are the `expect_` functions:
+
+```{r}
+expect_equal(2 + 3, 5)
+expect_error(sum(1, "two"))
+```
+
+If these tests are run individually and pass, they return no output. They return an error message if they fail:
+
+```{r, error = TRUE}
+expect_lt(3, 2)
 ```
