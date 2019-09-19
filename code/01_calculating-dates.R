@@ -1,4 +1,4 @@
-# 1: The manual way ----
+# 1: The 'manual' way ----
 
 # Number of Tuesdays in January 2018
 sum(format(seq(lubridate::dmy(01012018), 
@@ -33,7 +33,7 @@ n_day(lubridate::dmy(01012020), lubridate::dmy(31122020), 4)
 
 
 
-### 3: Check the function behaves as expected ----
+### 3: Informal checks that the function behaves as expected ----
 
 # Check that n_day errors if supplied with non-date start and ends
 n_day("2018-01-01", "2018-01-31", 2)
