@@ -171,3 +171,23 @@ test_that("Produces at least 52 instances of every day in 2020", {
 ```{r}
 test_file(here::here("code", "03_test-n_day.R"))
 ```
+
+
+## Contact
+
+### Jack Hannah
+
+[Email](mailto:jack.hannah1@nhs.net)
+[GitHub](https://github.com/jackhannah95)
+
+### Transforming Publishing Programme
+
+[Email](mailto:nss.isdtransformingpublishing@nhs.net)
+[GitHub](https://github.com/NHS-NSS-transforming-publications)
+[Website](https://www.isdscotland.org/Products-and-Services/Transforming-Publishing-Programme/)
+
+### ISD
+
+[Email](mailto:NSS.isdSHIS@nhs.net)
+[GitHub](https://github.com/Health-SocialCare-Scotland)
+[Website](https://www.isdscotland.org/)
