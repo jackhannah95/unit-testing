@@ -1,5 +1,6 @@
 library(testthat)
 
+# Source the n_day function
 source(here::here("code", "02_n_day.R"))
 
 test_that("Returns correct output", {
