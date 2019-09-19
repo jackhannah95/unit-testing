@@ -60,7 +60,7 @@ include_graphics(here::here("images", "pill-test.jpg"))
 
 - "_Testing should be something that you do all the time, but it’s normally painful and boring_" - [Hadley Wickham](https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf)
 
-- The testthat package provides functions to automate unit testing
+- The [testthat](https://github.com/r-lib/testthat) package provides functions to automate unit testing
 
 - It's designed with package development in mind, but there's no reason it can't be used to test functions in standalone scripts
 
@@ -89,7 +89,7 @@ expect_lt(3, 2)
 
 ## A practical example
 
-Imagine you want to calculate the number of instances of a particular day in a set time period (motivation: the HSMR publication goes out on the third last Tuesday of the month, every three months). You could do it 'manually' every time:
+Imagine you want to calculate the number of instances of a particular day in a set time period (motivation: the [HSMR publication](https://github.com/NHS-NSS-transforming-publications/hsmr) goes out on the third last Tuesday of the month, every three months). You could do it 'manually' every time:
 
 ```{r, message = FALSE}
 library(lubridate)
@@ -159,7 +159,7 @@ test_that("Errors if supplied with input of incorrect class", {
 })
 
 test_that("Produces at least 52 instances of every day in 2020", {
-  instances <- unlist(purrr::map(0:6, ~ n_day(dmy(01012020), dmy(31122020),.x)))
+  instances <- unlist(purrr::map(0:6, ~ n_day(dmy(01012020), dmy(31122020), .x)))
   
   expect_true(all(instances >= 52))
 })

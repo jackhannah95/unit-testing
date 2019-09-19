@@ -3147,7 +3147,7 @@ slide:not(.current) .plotly.html-widget{
 
 <ul>
 <li><p>&ldquo;<em>Testing should be something that you do all the time, but it’s normally painful and boring</em>&rdquo; - <a href='https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf' title=''>Hadley Wickham</a></p></li>
-<li><p>The testthat package provides functions to automate unit testing</p></li>
+<li><p>The <a href='https://github.com/r-lib/testthat' title=''>testthat</a> package provides functions to automate unit testing</p></li>
 <li><p>It’s designed with package development in mind, but there’s no reason it can’t be used to test functions in standalone scripts</p></li>
 </ul>
 
@@ -3170,7 +3170,7 @@ expect_error(sum(1, &quot;two&quot;))</pre>
 
 </article></slide><slide class=""><hgroup><h2>A practical example</h2></hgroup><article  id="a-practical-example">
 
-<p>Imagine you want to calculate the number of instances of a particular day in a set time period (motivation: the HSMR publication goes out on the third last Tuesday of the month, every three months). You could do it &lsquo;manually&rsquo; every time:</p>
+<p>Imagine you want to calculate the number of instances of a particular day in a set time period (motivation: the <a href='https://github.com/NHS-NSS-transforming-publications/hsmr' title=''>HSMR publication</a> goes out on the third last Tuesday of the month, every three months). You could do it &lsquo;manually&rsquo; every time:</p>
 
 <pre class = 'prettyprint lang-r'>library(lubridate)
 
@@ -3240,7 +3240,7 @@ unlist(purrr::map(0:6, ~ n_day(dmy(01012020), dmy(31122020), .x)))</pre>
 })
 
 test_that(&quot;Produces at least 52 instances of every day in 2020&quot;, {
-  instances &lt;- unlist(purrr::map(0:6, ~ n_day(dmy(01012020), dmy(31122020),.x)))
+  instances &lt;- unlist(purrr::map(0:6, ~ n_day(dmy(01012020), dmy(31122020), .x)))
   
   expect_true(all(instances &gt;= 52))
 })</pre>
@@ -3258,8 +3258,8 @@ test_that(&quot;Produces at least 52 instances of every day in 2020&quot;, {
 - |  5       | 0
 \ |  6       | 0
 | |  7       | 0
-## == Results =================================================================
-## Duration: 0.2 s
+## == Results =============================================================================================
+## Duration: 0.1 s
 ## 
 ## OK:       7
 ## Failed:   0
