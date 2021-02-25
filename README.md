@@ -1,2 +1,1 @@
-# Unit Testing
-Slides for talk on unit testing using the [testthat](https://github.com/r-lib/testthat) R package at the Scottish Government R user day on 01/10/2019. Slides can be viewed on [RPubs](http://rpubs.com/jackhannah95/unit-testing).
+The most up to date version of the materials for this presentation can now be found in my [presentations repository](https://github.com/jackhannah95/presentations/tree/main/2019-10-01_unit-testing).
